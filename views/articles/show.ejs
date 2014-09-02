@@ -1,0 +1,17 @@
+
+<div class="row clearfix well">
+  <div class="col-md-12 column">
+    <p class="text-center lead">
+      <%= article.content %>
+    </p>
+    <blockquote>
+      <p>
+        <%= article.title %>
+      </p> <cite><%= article.createdAt %></cite></small>
+    </blockquote>
+  </div>
+  <div class='pull-right'>
+    <a href="/article/add" class="btn btn-primary">Add New</a>
+    <a href="/article/<%= article.id%>/edit" class='btn btn-success'>Edit</a>
+  </div>
+</div>

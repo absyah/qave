@@ -1,0 +1,28 @@
+<div class="col-sm-6 col-sm-offset-3">
+
+  <h1><span class="fa fa-clipboard"></span> Add Article</h1>
+
+  <!-- show any messages that come back with authentication -->
+  <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+  <% } %>
+
+  <!-- ARTICLE FORM -->
+  <form action="/article" method="post">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" name="title">
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea class="form-control" name="content"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-warning btn-lg">Submit Article</button>
+  </form>
+
+  <hr>
+
+  <p><a href="/articles">Back</a></p>
+
+</div>

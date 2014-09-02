@@ -34,7 +34,48 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
+  },
+
+  // article routes and action
+
+  'get /articles': {
+    controller: 'Article',
+    action: 'index'
+  },
+
+  'post /article' : {
+    controller: 'Article',
+    action: 'create'
+  },
+
+  'get /article/add': {
+    controller: 'Article',
+    action: 'add'
+  },
+
+  'post /article/:id': {
+    controller: 'Article',
+    action: 'update'
+  },
+
+  'delete /article/:id': {
+    controller: 'Article',
+    action: 'destroy'
+  },
+
+  'get /article/:id': {
+    controller: 'Article',
+    action: 'show'
+  },
+
+
+  'get /article/:id/edit': {
+    controller: 'Article',
+    action: 'edit'
   }
+
+
+
 
   /***************************************************************************
   *                                                                          *
