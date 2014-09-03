@@ -11,7 +11,6 @@ module.exports = {
     index : function(req, res) {
         console.log('GET - /articles');
          return Article.find({}).exec(function(err, articles) {
-            console.log(articles);
             return res.view('articles/index.ejs', { articles: articles });
         });
     },
@@ -26,7 +25,6 @@ module.exports = {
             }
 
             if(!err){
-                console.log(article)
                 return res.view('articles/show.ejs', { article: article })
             }else{
                 res.statusCode = 500;

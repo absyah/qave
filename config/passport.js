@@ -12,10 +12,8 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use(new LocalStrategy(
+passport.use('local-login', new LocalStrategy(
   function(username, password, done) {
-    console.log(username);
-    console.log(password);
     User.findOne({ username: username }).exec(function(err, user) {
       console.log('Entering passport config login.')
       console.log(user);
@@ -26,6 +24,25 @@ passport.use(new LocalStrategy(
         return done(null, user);
       });
     });
+  })
+);
+
+passport.use('local-signup', new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username}).exec(function(err, user){
+      if (err) { return done(null, err); }
+      if (user){
+        return done(null, false, { message: 'User exists.' });
+      }else{
+        User.create({ username: username, password: password }).exec(function(err, user){
+          if(err){
+            throw err;
+          }else{
+            return done(null, user);
+          }
+        })
+      }
+    })
   })
 );
 

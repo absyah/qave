@@ -14,7 +14,7 @@ module.exports = {
 
   process: function(req,res){
     console.log('POST - /login')
-    passport.authenticate('local', function(err, user, info){
+    passport.authenticate('local-login', function(err, user, info){
       if ((err) || (!user)) {
         res.redirect('/login');
         return;
@@ -26,6 +26,27 @@ module.exports = {
         return res.redirect('/articles');
       });
     })(req, res);
+  },
+
+  signup: function(req,res){
+    res.view('auth/signup', { message: '' })
+  },
+
+  register: function(req, res){
+    console.log('POST -/register')
+    passport.authenticate('local-signup', function(err, user, info){
+      if ((err) || (!user)) {
+        res.redirect('/signup');
+        return;
+      }
+      req.logIn(user, function(err){
+        if(err){
+          res.redirect('/signup');
+        }
+        return res.redirect('/articles');
+      });
+    })(req, res);
+
   },
 
   logout: function (req,res){
