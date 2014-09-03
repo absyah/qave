@@ -32,6 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  'get /': "AuthController.login",
   'get /login': "AuthController.login",
   'post /login': 'AuthController.process',
   'get /logout': 'AuthController.logout',

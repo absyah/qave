@@ -17,7 +17,7 @@ passport.use(new LocalStrategy(
     console.log(username);
     console.log(password);
     User.findOne({ username: username }).exec(function(err, user) {
-      console.log('Entering passport config.')
+      console.log('Entering passport config login.')
       console.log(user);
       if (err) { return done(null, err); }
       if (!user || user.length < 1) { return done(null, false, { message: 'Incorrect User'}); }

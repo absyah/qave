@@ -4,6 +4,7 @@ module.exports = function(req, res, next){
     console.log(req.user[0]);
     return next();
   }else{
-    return res.send(403, { message: 'Not Authorized' });
+    return res.redirect('/');
+    // return res.send(403, { message: 'Not Authorized' });
   }
 }
