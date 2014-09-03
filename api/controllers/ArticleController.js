@@ -10,7 +10,7 @@ module.exports = {
     // Index
     index : function(req, res) {
         console.log('GET - /articles');
-        return Article.find({}).exec(function(err, articles) {
+         return Article.find({}).exec(function(err, articles) {
             console.log(articles);
             return res.view('articles/index.ejs', { articles: articles });
         });
