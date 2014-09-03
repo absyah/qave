@@ -42,6 +42,15 @@
   <body>
     
     <div class="container">
+      <!-- show any messages that come back with authentication -->
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <div class="alert alert-dismissable alert-info">
+            <strong><center><%- req.flash('message') %></center></strong>
+          </div>
+        </div>
+      </div>
+
       <%- body %>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

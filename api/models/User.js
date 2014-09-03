@@ -19,6 +19,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    articles: {
+      collection: 'article',
+      via : 'owner'
+    }, 
 
     //Override toJSON method to remove password from API
     toJSON: function() {

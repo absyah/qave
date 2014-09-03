@@ -16,6 +16,10 @@ module.exports = {
     content: {
       type: 'text',
       required: true
+    },
+
+    owner: {
+      model: 'user'
     }
   }
 };

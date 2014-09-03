@@ -5,7 +5,7 @@
       <blockquote>
         <p>
           <%= articles[x].content %>
-        </p> <small> <%= articles[x].title %> <cite> @<%= articles[x].createdAt %></cite></small>
+        </p> by <%= articles[x].owner.username %> <small> <%= articles[x].title %> <cite> @<%= articles[x].createdAt %></cite></small>
         <a href="/article/<%= articles[x].id %>" class='btn btn-default'>Show</a>
         <a href="/article/<%= articles[x].id%>/edit" class='btn btn-success'>Edit</a>
         <a href="/article/<%= articles[x].id %>" data-method="DELETE" class="delete-link btn btn-danger">Destroy</a>

@@ -9,20 +9,23 @@ var passport = require("passport");
 module.exports = {
   login: function(req,res){
     console.log('GET - /login')
-    res.view("auth/login", { message: '' });
+    res.view("auth/login");
   },
 
   process: function(req,res){
     console.log('POST - /login')
     passport.authenticate('local-login', function(err, user, info){
       if ((err) || (!user)) {
+        req.flash('message', 'Invalid username or password');
         res.redirect('/login');
         return;
       }
       req.logIn(user, function(err){
         if(err){
+          req.flash('message', 'Invalid username or password');
           res.redirect('/login');
         }
+        req.flash('message', 'Welcome back.');
         return res.redirect('/articles');
       });
     })(req, res);
