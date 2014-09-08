@@ -19,6 +19,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    admin: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     articles: {
       collection: 'article',
       via : 'owner'

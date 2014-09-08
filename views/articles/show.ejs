@@ -12,6 +12,8 @@
   </div>
   <div class='pull-right'>
     <a href="/article/add" class="btn btn-primary">Add New</a>
-    <a href="/article/<%= article.id%>/edit" class='btn btn-success'>Edit</a>
+    <% if(article.owner.id == session.user.id || session.user.admin) { %>
+      <a href="/article/<%= article.id%>/edit" class='btn btn-success'>Edit</a>
+    <% } %>
   </div>
 </div>

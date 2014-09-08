@@ -25,6 +25,7 @@ module.exports = {
           req.flash('message', 'Invalid username or password');
           res.redirect('/login');
         }
+        req.session.user = user;
         req.flash('message', 'Welcome back.');
         return res.redirect('/articles');
       });
@@ -46,6 +47,7 @@ module.exports = {
         if(err){
           res.redirect('/signup');
         }
+        req.session.user = user;
         return res.redirect('/articles');
       });
     })(req, res);
@@ -54,8 +56,10 @@ module.exports = {
 
   logout: function (req,res){
     console.log('GET - /logout')
+    req.session.user = null;
     req.logout();
-    res.send('logout successful');
+    req.flash('message', 'Logout successfully.');
+    return res.redirect('/');
   },
   _config: {}
 };

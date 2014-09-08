@@ -35,6 +35,13 @@ module.exports.policies = {
 
   AuthController: {
     '*': true,
+  },
+
+  ArticleController: {
+    '*': 'authenticated',
+    'edit': ['authenticated', 'articleAuthorization'],
+    'update': ['authenticated', 'articleAuthorization'],
+    'destroy': ['authenticated', 'articleAuthorization']
   }
 
   /***************************************************************************

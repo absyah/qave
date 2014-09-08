@@ -10,15 +10,24 @@ module.exports = {
     // Index
     index : function(req, res) {
         console.log('GET - /articles');
-         return Article.find({ owner: req.user[0].id }).populate('owner').exec(function(err, articles) {
+        return Article.find({}).populate('owner').exec(function(err, articles) {
             return res.view('articles/index.ejs', { articles: articles });
+        });
+    },
+
+    // My articles
+    my_articles : function(req, res){
+        console.log('GET - /my_articles');
+        var user = req.session.user;
+        return Article.find({ owner: user.id }).populate('owner').exec(function(err, articles) {
+            return res.view('articles/my_articles.ejs', { articles: articles });
         });
     },
 
     // Show action
     show : function(req, res) {
         console.log('GET - /article/:id');
-        return Article.findOne({ id: req.params.id, owner: req.user[0].id }).exec(function(err, article) {
+        return Article.findOne({ id: req.params.id }).populate('owner').exec(function(err, article) {
             if(!article){
                 res.statusCode = 404;
                 return res.send({ error: 'Article not found.' });
@@ -44,10 +53,11 @@ module.exports = {
     // Create action
     create : function(req, res){
         console.log('POST - /article');
+        var user = req.session.user;
         var articleObj = {
                             title   : req.body.title, 
                             content : req.body.content,
-                            owner   : req.user[0].id
+                            owner   : user.id
         };
 
         return Article.create(articleObj).exec(function(err, article){
@@ -65,7 +75,7 @@ module.exports = {
     // Edit action
     edit : function(req, res) {
         console.log('GET - /article/:id/edit');
-        return Article.findOne({ id: req.params.id , owner: req.user[0].id }).exec(function(err, article){
+        return Article.findOne({ id: req.params.id }).exec(function(err, article){
              if(!article){
                 res.statusCode = 404;
                 return res.send({ error: 'Article not found.' });
@@ -85,10 +95,11 @@ module.exports = {
     // Update action
     update : function(req, res) {
         console.log('PUT - /article/:id');
+        var user = req.session.user;
         var articleObj = {
                             title   : req.body.title,
                             content : req.body.content,
-                            owner   : req.user[0].id
+                            owner   : user.id
         }
         return Article.update({ id: req.params.id }, articleObj).exec(function(err, article){
             if(!err){
@@ -105,7 +116,8 @@ module.exports = {
     // Destroy action
     destroy: function(req, res) {
         console.log('DELETE - /article:id');
-        return Article.destroy({ id: req.params.id, owner: req.user[0].id }).exec(function(err){
+        var user = req.session.user;
+        return Article.destroy({ id: req.params.id }).exec(function(err){
             if(err){
                 res.statusCode = 500;
                 console.log('Internal server error(%d): %s', res.statusCode, err)

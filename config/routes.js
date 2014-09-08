@@ -46,6 +46,11 @@ module.exports.routes = {
     action: 'index'
   },
 
+  'get /my_articles': {
+    controller: 'Article',
+    action: 'my_articles'
+  },
+
   'post /article' : {
     controller: 'Article',
     action: 'create'
